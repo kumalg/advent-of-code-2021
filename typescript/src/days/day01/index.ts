@@ -14,7 +14,7 @@ export default class Day01 implements Day {
 
   private getIncreasedCount(array: Array<number>, zipSize: number): number {
     return array
-      .slice(0, -zipSize + 1 || undefined)
+      .slice(0, 1 - zipSize || undefined)
       .map((_, i) =>
         array.slice(i, i + zipSize).reduce((acc, curr) => acc + curr, 0)
       )
