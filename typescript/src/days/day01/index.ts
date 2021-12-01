@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { Day } from "interfaces/day";
 import path from "path";
 
-export default class Day1 implements Day {
+export default class Day01 implements Day {
   input: Array<number>;
 
   constructor() {
@@ -21,11 +21,9 @@ export default class Day1 implements Day {
   }
 
   secondPart(): number {
-    const { input } = this;
-
-    const list = input
+    const list = this.input
       .slice(0, -2)
-      .map((number, i) => number + input[i + 1] + input[i + 2]);
+      .map((number, i, list) => number + list[i + 1] + list[i + 2]);
 
     return this.getIncreasedCount(list);
   }

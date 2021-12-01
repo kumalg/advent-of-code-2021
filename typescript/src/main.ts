@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import Day from "./days/day1";
+import Day from "./days/day01";
 
 export const main = (): boolean => {
   const day = new Day();
