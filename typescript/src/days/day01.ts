@@ -1,15 +1,11 @@
-import { readFileSync } from "fs";
-import { Day } from "interfaces/day";
-import path from "path";
+import { Day } from "../classes/day";
 
-export default class implements Day {
+export default class extends Day {
   input: Array<number>;
 
-  constructor(resources: string) {
-    this.input = readFileSync(path.join(resources, "day01/input.txt"), "utf-8")
-      .split(/\r?\n/)
-      .filter((line) => line)
-      .map((line) => parseInt(line));
+  constructor(resourcesPath: string) {
+    super(resourcesPath, __filename);
+    this.input = this.getInputLines().map((line) => parseInt(line));
   }
 
   private getIncreasedCount(array: Array<number>, zipSize: number): number {
