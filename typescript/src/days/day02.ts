@@ -1,4 +1,4 @@
-import { Day } from "../classes/day";
+import { Day } from "../day";
 
 export default class extends Day {
   input: Array<string>;

@@ -1,9 +1,8 @@
 import { bold, yellowBright } from "chalk";
 import { readFileSync } from "fs";
 import path from "path";
-import { IDay } from "../interfaces/day";
 
-export abstract class Day implements IDay {
+export abstract class Day {
   basePath: string;
 
   abstract firstStar(): string | number;
