@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { Day } from "interfaces/day";
-import path from "path/posix";
+import path from "path";
 
 export default class Day1 implements Day {
   input: Array<number>;
