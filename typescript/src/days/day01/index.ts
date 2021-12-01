@@ -21,11 +21,11 @@ export default class Day01 implements Day {
       .filter((number, i, list) => i > 0 && number > list[i - 1]).length;
   }
 
-  firstPart(): number {
+  firstStar(): number {
     return this.getIncreasedCount(this.input, 1);
   }
 
-  secondPart(): number {
+  secondStar(): number {
     return this.getIncreasedCount(this.input, 3);
   }
 }

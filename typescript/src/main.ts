@@ -6,13 +6,11 @@ export const main = (): boolean => {
   const arg = process.argv[2];
 
   if (!arg || arg === "1") {
-    const firstResult = day.firstPart();
-    console.log(`First part: ${firstResult}`);
+    console.log(`First star: ${day.firstStar()}`);
   }
 
   if (!arg || arg === "2") {
-    const secondResult = day.secondPart();
-    console.log(`Second part: ${secondResult}`);
+    console.log(`Second star: ${day.secondStar()}`);
   }
 
   return true;

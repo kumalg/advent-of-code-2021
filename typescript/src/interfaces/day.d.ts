@@ -1,4 +1,4 @@
 export interface Day {
-  firstPart(): string | number;
-  secondPart(): string | number;
+  firstStar(): string | number;
+  secondStar(): string | number;
 }
