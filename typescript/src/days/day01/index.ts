@@ -16,7 +16,7 @@ export default class Day01 implements Day {
     return array
       .slice(0, 1 - zipSize || undefined)
       .map((_, i) =>
-        array.slice(i, i + zipSize).reduce((acc, curr) => acc + curr, 0)
+        array.slice(i, i + zipSize).reduce((acc, curr) => acc + curr)
       )
       .filter((number, i, list) => i > 0 && number > list[i - 1]).length;
   }
