@@ -1,3 +1,4 @@
+import { bold, yellowBright } from "chalk";
 import { readFileSync } from "fs";
 import path from "path";
 import { IDay } from "../interfaces/day";
@@ -21,5 +22,17 @@ export abstract class Day implements IDay {
     return this.getInputText(fileName)
       .split(/\r?\n/)
       .filter((line) => line);
+  }
+
+  printFirstStar(): void {
+    console.log(`First star:  ${this.formattedResult(this.firstStar())}`);
+  }
+
+  printSecondStar(): void {
+    console.log(`Second star: ${this.formattedResult(this.secondStar())}`);
+  }
+
+  private formattedResult(result: string | number): string {
+    return bold(yellowBright(result));
   }
 }

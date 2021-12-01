@@ -1,11 +1,6 @@
 #!/usr/bin/env node
-import { bold, yellowBright } from "chalk";
 import path from "path";
 import Day from "./days/day01";
-
-function formattedResult(result: string | number): string {
-  return bold(yellowBright(result));
-}
 
 export const main = (): boolean => {
   const resourcesPath = path.join(__dirname, "../resources");
@@ -15,11 +10,11 @@ export const main = (): boolean => {
   console.log();
 
   if (!arg || arg === "1") {
-    console.log(`First star:  ${formattedResult(day.firstStar())}`);
+    day.printFirstStar();
   }
 
   if (!arg || arg === "2") {
-    console.log(`Second star: ${formattedResult(day.secondStar())}`);
+    day.printSecondStar();
   }
 
   console.log();

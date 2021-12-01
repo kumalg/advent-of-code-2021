@@ -1,5 +1,3 @@
-import { readFileSync } from "fs";
-import path from "path";
 import { Day } from "../classes/day";
 
 export default class extends Day {
@@ -7,9 +5,7 @@ export default class extends Day {
 
   constructor(resourcesPath: string) {
     super(resourcesPath, __filename);
-    this.input = readFileSync(path.join(this.basePath, "input.txt"), "utf-8")
-      .split(/\r?\n/)
-      .filter((line) => line);
+    this.input = this.getInputLines();
   }
 
   firstStar(): string | number {
