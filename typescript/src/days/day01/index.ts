@@ -12,19 +12,20 @@ export default class Day01 implements Day {
       .map((line) => parseInt(line));
   }
 
-  private getIncreasedCount(array: Array<number>): number {
-    return array.filter((number, i) => i > 0 && number > array[i - 1]).length;
+  private getIncreasedCount(array: Array<number>, zipSize: number): number {
+    return array
+      .slice(0, -zipSize + 1 || undefined)
+      .map((_, i) =>
+        array.slice(i, i + zipSize).reduce((acc, curr) => acc + curr, 0)
+      )
+      .filter((number, i, list) => i > 0 && number > list[i - 1]).length;
   }
 
   firstPart(): number {
-    return this.getIncreasedCount(this.input);
+    return this.getIncreasedCount(this.input, 1);
   }
 
   secondPart(): number {
-    const list = this.input
-      .slice(0, -2)
-      .map((number, i, list) => number + list[i + 1] + list[i + 2]);
-
-    return this.getIncreasedCount(list);
+    return this.getIncreasedCount(this.input, 3);
   }
 }
