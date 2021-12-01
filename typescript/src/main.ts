@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { bold, yellowBright } from "chalk";
+import path from "path";
 import Day from "./days/day01";
 
 function formattedResult(result: string | number): string {
@@ -7,7 +8,8 @@ function formattedResult(result: string | number): string {
 }
 
 export const main = (): boolean => {
-  const day = new Day();
+  const resourcesPath = path.join(__dirname, "../resources");
+  const day = new Day(resourcesPath);
   const arg = process.argv[2];
 
   console.log();

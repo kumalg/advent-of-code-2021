@@ -2,11 +2,11 @@ import { readFileSync } from "fs";
 import { Day } from "interfaces/day";
 import path from "path";
 
-export default class Day01 implements Day {
+export default class implements Day {
   input: Array<number>;
 
-  constructor() {
-    this.input = readFileSync(path.join(__dirname, "input.txt"), "utf-8")
+  constructor(resources: string) {
+    this.input = readFileSync(path.join(resources, "day01/input.txt"), "utf-8")
       .split(/\r?\n/)
       .filter((line) => line)
       .map((line) => parseInt(line));
