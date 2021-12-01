@@ -2,24 +2,18 @@
 import path from "path";
 import Day from "./days/day01";
 
-export const main = (): boolean => {
-  const resourcesPath = path.join(__dirname, "../resources");
-  const day = new Day(resourcesPath);
-  const arg = process.argv[2];
+const resourcesPath = path.join(__dirname, "../resources");
+const day = new Day(resourcesPath);
+const arg = process.argv[2];
 
-  console.log();
+console.log();
 
-  if (!arg || arg === "1") {
-    day.printFirstStar();
-  }
+if (!arg || arg === "1") {
+  day.printFirstStar();
+}
 
-  if (!arg || arg === "2") {
-    day.printSecondStar();
-  }
+if (!arg || arg === "2") {
+  day.printSecondStar();
+}
 
-  console.log();
-
-  return true;
-};
-
-main();
+console.log();
