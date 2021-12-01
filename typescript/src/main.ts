@@ -10,6 +10,8 @@ export const main = (): boolean => {
   const day = new Day();
   const arg = process.argv[2];
 
+  console.log();
+
   if (!arg || arg === "1") {
     console.log(`First star:  ${formattedResult(day.firstStar())}`);
   }
@@ -17,6 +19,8 @@ export const main = (): boolean => {
   if (!arg || arg === "2") {
     console.log(`Second star: ${formattedResult(day.secondStar())}`);
   }
+
+  console.log();
 
   return true;
 };
