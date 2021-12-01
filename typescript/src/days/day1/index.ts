@@ -7,7 +7,7 @@ export default class Day1 implements Day {
 
   constructor() {
     this.input = readFileSync(path.join(__dirname, "input.txt"), "utf-8")
-      .split("\r\n")
+      .split(/\r?\n/)
       .filter((line) => line)
       .map((line) => parseInt(line));
   }
