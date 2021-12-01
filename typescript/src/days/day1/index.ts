@@ -35,11 +35,11 @@ export default class Day1 implements Day {
     ).increasedCount;
   }
 
-  async firstPart(): Promise<string | number> {
+  async firstPart(): Promise<number> {
     return this.getIncreasedCount(this.input);
   }
 
-  async secondPart(): Promise<string | number> {
+  async secondPart(): Promise<number> {
     const { input } = this;
 
     const list = input
