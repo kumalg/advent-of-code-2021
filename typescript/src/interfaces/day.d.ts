@@ -1,4 +1,4 @@
 export interface Day {
-  firstPart(): Promise<string | number>;
-  secondPart(): Promise<string | number>;
+  firstPart(): string | number;
+  secondPart(): string | number;
 }

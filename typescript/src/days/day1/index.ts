@@ -2,11 +2,6 @@ import { readFileSync } from "fs";
 import { Day } from "interfaces/day";
 import path from "path/posix";
 
-interface Acc {
-  previous: null | number;
-  increasedCount: number;
-}
-
 export default class Day1 implements Day {
   input: Array<number>;
 
@@ -18,28 +13,14 @@ export default class Day1 implements Day {
   }
 
   private getIncreasedCount(array: Array<number>): number {
-    return array.reduce<Acc>(
-      ({ previous, increasedCount }, current) => {
-        return {
-          previous: current,
-          increasedCount:
-            previous !== null && previous < current
-              ? increasedCount + 1
-              : increasedCount,
-        };
-      },
-      {
-        previous: null,
-        increasedCount: 0,
-      }
-    ).increasedCount;
+    return array.filter((number, i) => i > 0 && number > array[i - 1]).length;
   }
 
-  async firstPart(): Promise<number> {
+  firstPart(): number {
     return this.getIncreasedCount(this.input);
   }
 
-  async secondPart(): Promise<number> {
+  secondPart(): number {
     const { input } = this;
 
     const list = input
