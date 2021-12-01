@@ -40,9 +40,11 @@ export default class Day1 implements Day {
   }
 
   async secondPart(): Promise<string | number> {
-    const list = this.input
+    const { input } = this;
+
+    const list = input
       .slice(0, -2)
-      .map((number, i) => number + this.input[i + 1] + this.input[i + 2]);
+      .map((number, i) => number + input[i + 1] + input[i + 2]);
 
     return this.getIncreasedCount(list);
   }
