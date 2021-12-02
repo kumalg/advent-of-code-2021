@@ -5,7 +5,7 @@ export default class extends Day {
 
   constructor(resourcesPath: string) {
     super(resourcesPath, __filename);
-    this.input = this.getInputLines("input.txt").map((line) => {
+    this.input = this.getInputLines().map((line) => {
       const [type, value] = line.split(" ");
       return {
         type,
