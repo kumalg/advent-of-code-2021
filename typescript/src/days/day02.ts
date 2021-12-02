@@ -15,7 +15,7 @@ export default class extends Day {
   }
 
   firstStar(): number {
-    const finalPosition = this.input.reduce(
+    const { horizontal, depth } = this.input.reduce(
       (position, { type, value }) => {
         if (type === "forward") {
           position.horizontal += value;
@@ -29,11 +29,11 @@ export default class extends Day {
       { horizontal: 0, depth: 0 }
     );
 
-    return finalPosition.horizontal * finalPosition.depth;
+    return horizontal * depth;
   }
 
   secondStar(): number {
-    const finalPosition = this.input.reduce(
+    const { horizontal, depth } = this.input.reduce(
       (position, { type, value }) => {
         if (type === "forward") {
           position.horizontal += value;
@@ -48,6 +48,6 @@ export default class extends Day {
       { aim: 0, horizontal: 0, depth: 0 }
     );
 
-    return finalPosition.horizontal * finalPosition.depth;
+    return horizontal * depth;
   }
 }
