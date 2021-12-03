@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import path from "path";
-import Day from "./days/day02";
+import Day from "./days/day03";
 
 const resourcesPath = path.join(__dirname, "../resources");
 const day = new Day(resourcesPath);
