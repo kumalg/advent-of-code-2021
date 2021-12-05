@@ -6,14 +6,17 @@ export default class extends Day {
 
   constructor(resourcesPath: string) {
     super(resourcesPath, __filename);
+    const regex = /(\d+),(\d+) -> (\d+),(\d+)/;
     this.input = this.getInputLines().map((line) => {
-      const [startStr, endStr] = line.split(" -> ");
-      const start = startStr.split(",").map((e: string) => parseInt(e));
-      const end = endStr.split(",").map((e: string) => parseInt(e));
+      const [xS, yS, xE, yE] =
+        line
+          .match(regex)
+          ?.slice(1)
+          .map((e) => parseInt(e)) || [];
 
       return {
-        start,
-        end,
+        start: [xS, yS],
+        end: [xE, yE],
       };
     });
   }
