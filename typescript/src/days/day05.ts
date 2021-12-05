@@ -7,19 +7,19 @@ export default class extends Day {
   constructor(resourcesPath: string) {
     super(resourcesPath, __filename);
     this.input = this.getInputLines().map((line) => {
-      const [start, end] = line.split(" -> ");
-      const startPos = start.split(",").map((e: string) => parseInt(e));
-      const endPos = end.split(",").map((e: string) => parseInt(e));
+      const [startStr, endStr] = line.split(" -> ");
+      const start = startStr.split(",").map((e: string) => parseInt(e));
+      const end = endStr.split(",").map((e: string) => parseInt(e));
 
       return {
-        start: startPos,
-        end: endPos,
+        start,
+        end,
       };
     });
   }
 
   firstStar(): number {
-    const lines = this.input
+    const points = this.input
       .map(({ start, end }) => {
         if (start[0] === end[0]) {
           return [...new Array(Math.abs(end[1] - start[1]) + 1)].map((_, i) => [
@@ -37,15 +37,14 @@ export default class extends Day {
 
         return [];
       })
-      .filter((e) => e.length > 0);
+      .flatMap((e) => e)
+      .map((eee) => eee[0] + "," + eee[1]);
 
-    const flatt = lines.flatMap((e) => e).map((eee) => eee[0] + "," + eee[1]);
-
-    return Object.values(groupBy(flatt)).filter((e) => e.length > 1).length;
+    return Object.values(groupBy(points)).filter((e) => e.length > 1).length;
   }
 
   secondStar(): number {
-    const lines = this.input
+    const points = this.input
       .map(({ start, end }) => {
         if (start[0] === end[0]) {
           return [...new Array(Math.abs(end[1] - start[1]) + 1)].map((_, i) => [
@@ -70,10 +69,9 @@ export default class extends Day {
 
         return [];
       })
-      .filter((e) => e.length > 0);
+      .flatMap((e) => e)
+      .map((eee) => eee[0] + "," + eee[1]);
 
-    const flatt = lines.flatMap((e) => e).map((eee) => eee[0] + "," + eee[1]);
-
-    return Object.values(groupBy(flatt)).filter((e) => e.length > 1).length;
+    return Object.values(groupBy(points)).filter((e) => e.length > 1).length;
   }
 }
