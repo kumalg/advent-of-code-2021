@@ -2,7 +2,7 @@ import { groupBy } from "lodash";
 import { Day } from "../day";
 
 export default class extends Day {
-  input: Array<any>;
+  input: Array<{ start: number[]; end: number[] }>;
 
   constructor(resourcesPath: string) {
     super(resourcesPath, __filename);
@@ -48,7 +48,7 @@ export default class extends Day {
         return [];
       })
       .flatMap((e) => e)
-      .map((eee) => eee[0] + "," + eee[1]);
+      .map(([x, y]) => x + "," + y);
 
     return Object.values(groupBy(points)).filter((e) => e.length > 1).length;
   }
