@@ -20,28 +20,28 @@ export default class extends Day {
 
   private getOverlappedPointsCount(withDiagonals: boolean): number {
     const points = this.input
-      .map(({ start, end }) => {
-        if (start[0] === end[0]) {
-          return [...new Array(Math.abs(end[1] - start[1]) + 1)].map((_, i) => [
-            end[0],
-            Math.min(end[1], start[1]) + i,
+      .map(({ start: [xStart, yStart], end: [xEnd, yEnd] }) => {
+        if (xStart === xEnd) {
+          return [...new Array(Math.abs(yEnd - yStart) + 1)].map((_, i) => [
+            xEnd,
+            Math.min(yEnd, yStart) + i,
           ]);
         }
 
-        if (start[1] === end[1]) {
-          return [...new Array(Math.abs(end[0] - start[0]) + 1)].map((_, i) => [
-            Math.min(end[0], start[0]) + i,
-            end[1],
+        if (yStart === yEnd) {
+          return [...new Array(Math.abs(xEnd - xStart) + 1)].map((_, i) => [
+            Math.min(xEnd, xStart) + i,
+            yEnd,
           ]);
         }
 
         if (
           withDiagonals &&
-          Math.abs(start[0] - end[0]) === Math.abs(start[1] - end[1])
+          Math.abs(xStart - xEnd) === Math.abs(yStart - yEnd)
         ) {
-          return [...new Array(Math.abs(end[0] - start[0]) + 1)].map((_, i) => [
-            start[0] < end[0] ? start[0] + i : start[0] - i,
-            start[1] < end[1] ? start[1] + i : start[1] - i,
+          return [...new Array(Math.abs(xEnd - xStart) + 1)].map((_, i) => [
+            xStart < xEnd ? xStart + i : xStart - i,
+            yStart < yEnd ? yStart + i : yStart - i,
           ]);
         }
 
