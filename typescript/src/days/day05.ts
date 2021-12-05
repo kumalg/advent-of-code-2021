@@ -6,11 +6,10 @@ export default class extends Day {
 
   constructor(resourcesPath: string) {
     super(resourcesPath, __filename);
-    const regex = /(\d+),(\d+) -> (\d+),(\d+)/;
     this.input = this.getInputLines().map((line) => {
       const [xS, yS, xE, yE] =
         line
-          .match(regex)
+          .match(/(\d+),(\d+) -> (\d+),(\d+)/)
           ?.slice(1)
           .map((e) => parseInt(e)) || [];
 
