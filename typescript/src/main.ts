@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import path from "path";
-import Day from "./days/day04";
+import Day from "./days/day06";
 
 declare global {
   interface Array<T> {
@@ -9,10 +9,7 @@ declare global {
 }
 
 Array.prototype.sum = function <T>(func?: (item: T) => number) {
-  if (func) {
-    return this.reduce((acc, curr) => acc + func(curr), 0);
-  }
-  return this.reduce((acc, curr) => acc + curr, 0);
+  return this.reduce((acc, curr) => acc + (func ? func(curr) : curr), 0);
 };
 
 const resourcesPath = path.join(__dirname, "../resources");
