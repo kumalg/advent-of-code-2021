@@ -18,12 +18,12 @@ export default class extends Day {
       (_, i) => groupedTimers[i.toString()]?.length || 0
     );
 
-    const result: Array<number> = [...new Array(days)].reduce(
-      (acc) => [...acc.slice(1, 7), acc[7] + acc[0], acc[8], acc[0]],
-      initialState
-    );
-
-    return result.reduce((acc, curr) => acc + curr, 0);
+    return [...new Array(days)]
+      .reduce(
+        (acc) => [...acc.slice(1, 7), acc[7] + acc[0], acc[8], acc[0]],
+        initialState
+      )
+      .reduce((acc: number, curr: number) => acc + curr, 0);
   }
 
   firstStar(): number {
