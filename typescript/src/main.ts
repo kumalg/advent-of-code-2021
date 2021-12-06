@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-Array.prototype.sum = function <T>(func?: (item: T) => number) {
+Array.prototype.sum = function (func) {
   return this.reduce((acc, curr) => acc + (func ? func(curr) : curr), 0);
 };
 

@@ -1,4 +1,5 @@
 import { groupBy } from "lodash";
+import { range } from "../helpers";
 import { Day } from "../day";
 
 export default class extends Day {
@@ -14,11 +15,11 @@ export default class extends Day {
 
   countLanternfishes(days: number) {
     const groupedTimers = groupBy(this.input);
-    const initialState: Array<number> = [...new Array(9)].map(
+    const initialState: Array<number> = range(0, 9).map(
       (_, i) => groupedTimers[i]?.length || 0
     );
 
-    return [...new Array(days)]
+    return range(0, days)
       .reduce(
         (acc) => [...acc.slice(1, 7), acc[7] + acc[0], acc[8], acc[0]],
         initialState
