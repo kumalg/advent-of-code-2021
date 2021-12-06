@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import path from "path";
-import Day from "./days/day06";
+import Day from "./days/day04";
 
 declare global {
   interface Array<T> {
-    sum(func?: (item: T) => number | bigint): number | bigint;
+    sum(func?: (item: T) => number): number;
   }
 }
 
-Array.prototype.sum = function <T>(func?: (item: T) => number | bigint) {
+Array.prototype.sum = function <T>(func?: (item: T) => number) {
   if (func) {
     return this.reduce((acc, curr) => acc + func(curr), 0);
   }

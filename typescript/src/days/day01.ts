@@ -11,9 +11,7 @@ export default class extends Day {
   private getIncreasedCount(array: Array<number>, zipSize: number): number {
     return array
       .slice(0, 1 - zipSize || undefined)
-      .map((_, i) =>
-        array.slice(i, i + zipSize).reduce((acc, curr) => acc + curr)
-      )
+      .map((_, i) => array.slice(i, i + zipSize).sum())
       .filter((number, i, list) => i > 0 && number > list[i - 1]).length;
   }
 

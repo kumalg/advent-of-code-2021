@@ -52,8 +52,7 @@ export default class extends Day {
       winner
         .flatMap((row) => row)
         .filter((num) => !winningSubset.includes(num))
-        .reduce((acc, curr) => acc + curr) *
-      winningSubset[winningSubset.length - 1]
+        .sum() * winningSubset[winningSubset.length - 1]
     );
   }
 
@@ -96,8 +95,7 @@ export default class extends Day {
       winner
         .flatMap((row) => row)
         .filter((num) => !winningSubset.includes(num))
-        .reduce((acc, curr) => acc + curr, 0) *
-      winningSubset[winningSubset.length - 1]
+        .sum() * winningSubset[winningSubset.length - 1]
     );
   }
 }
