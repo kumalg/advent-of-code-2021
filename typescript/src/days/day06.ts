@@ -15,7 +15,7 @@ export default class extends Day {
   countLanternfishes(days: number) {
     const groupedTimers = groupBy(this.input);
     const initialState: Array<number> = [...new Array(9)].map(
-      (_, i) => groupedTimers[i.toString()]?.length || 0
+      (_, i) => groupedTimers[i]?.length || 0
     );
 
     return [...new Array(days)]
