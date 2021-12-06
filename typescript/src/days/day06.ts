@@ -23,7 +23,7 @@ export default class extends Day {
         (acc) => [...acc.slice(1, 7), acc[7] + acc[0], acc[8], acc[0]],
         initialState
       )
-      .reduce((acc: number, curr: number) => acc + curr);
+      .sum();
   }
 
   firstStar(): number {
