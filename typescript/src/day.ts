@@ -5,8 +5,8 @@ import path from "path";
 export abstract class Day {
   basePath: string;
 
-  abstract firstStar(): string | number;
-  abstract secondStar(): string | number;
+  abstract firstStar(): string | number | bigint;
+  abstract secondStar(): string | number | bigint;
 
   constructor(resourcesPath: string, fileName: string) {
     const dayName = path.parse(fileName).name;
@@ -31,7 +31,7 @@ export abstract class Day {
     console.log(`Second star: ${this.formattedResult(this.secondStar())}`);
   }
 
-  private formattedResult(result: string | number): string {
+  private formattedResult(result: string | number | bigint): string {
     return bold(yellowBright(result));
   }
 }
