@@ -1,4 +1,5 @@
 import { groupBy } from "lodash";
+import { range } from "../helpers";
 import { Day } from "../day";
 
 export default class extends Day {
@@ -24,24 +25,22 @@ export default class extends Day {
     const points = this.input
       .map(({ start: [xStart, yStart], end: [xEnd, yEnd] }) => {
         if (xStart === xEnd) {
-          return [...new Array(Math.abs(yEnd - yStart) + 1)].map((_, i) => [
-            xEnd,
-            Math.min(yEnd, yStart) + i,
-          ]);
+          return range(Math.min(yEnd, yStart), Math.abs(yEnd - yStart) + 1).map(
+            (y) => [xEnd, y]
+          );
         }
 
         if (yStart === yEnd) {
-          return [...new Array(Math.abs(xEnd - xStart) + 1)].map((_, i) => [
-            Math.min(xEnd, xStart) + i,
-            yEnd,
-          ]);
+          return range(Math.min(xEnd, xStart), Math.abs(xEnd - xStart) + 1).map(
+            (x) => [x, yEnd]
+          );
         }
 
         if (
           withDiagonals &&
           Math.abs(xStart - xEnd) === Math.abs(yStart - yEnd)
         ) {
-          return [...new Array(Math.abs(xEnd - xStart) + 1)].map((_, i) => [
+          return range(0, Math.abs(xEnd - xStart) + 1).map((i) => [
             xStart < xEnd ? xStart + i : xStart - i,
             yStart < yEnd ? yStart + i : yStart - i,
           ]);
@@ -49,7 +48,7 @@ export default class extends Day {
 
         return [];
       })
-      .flatMap((e) => e)
+      .flat()
       .map(([x, y]) => x + "," + y);
 
     return Object.values(groupBy(points)).filter((e) => e.length > 1).length;
