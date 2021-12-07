@@ -15,10 +15,10 @@ export default class extends Day {
   }
 
   cheapestOutcomeFuel(burnFunc: (steps: number) => number) {
-    const { input } = this;
-
     return range(this.max, 1)
-      .map((to) => input.map((from) => burnFunc(Math.abs(from - to))).sum())
+      .map((to) =>
+        this.input.map((from) => burnFunc(Math.abs(from - to))).sum()
+      )
       .sort((a, b) => a - b)[0];
   }
 
