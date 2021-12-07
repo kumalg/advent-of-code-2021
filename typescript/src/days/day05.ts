@@ -25,13 +25,13 @@ export default class extends Day {
     const points = this.input
       .map(({ start: [xStart, yStart], end: [xEnd, yEnd] }) => {
         if (xStart === xEnd) {
-          return range(Math.min(yEnd, yStart), Math.abs(yEnd - yStart) + 1).map(
+          return range(Math.abs(yEnd - yStart) + 1, Math.min(yEnd, yStart)).map(
             (y) => [xEnd, y]
           );
         }
 
         if (yStart === yEnd) {
-          return range(Math.min(xEnd, xStart), Math.abs(xEnd - xStart) + 1).map(
+          return range(Math.abs(xEnd - xStart) + 1, Math.min(xEnd, xStart)).map(
             (x) => [x, yEnd]
           );
         }
@@ -40,7 +40,7 @@ export default class extends Day {
           withDiagonals &&
           Math.abs(xStart - xEnd) === Math.abs(yStart - yEnd)
         ) {
-          return range(0, Math.abs(xEnd - xStart) + 1).map((i) => [
+          return range(Math.abs(xEnd - xStart) + 1).map((i) => [
             xStart < xEnd ? xStart + i : xStart - i,
             yStart < yEnd ? yStart + i : yStart - i,
           ]);
