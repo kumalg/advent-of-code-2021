@@ -11,7 +11,7 @@ export default class extends Day {
       .trim()
       .split(",")
       .map((e) => parseInt(e));
-    this.max = [...this.input].sort((a, b) => b - a)[0];
+    this.max = [...this.input].orderByDescending()[0];
   }
 
   cheapestOutcomeFuel(burnFunc: (steps: number) => number) {
@@ -19,7 +19,7 @@ export default class extends Day {
       .map((to) =>
         this.input.map((from) => burnFunc(Math.abs(from - to))).sum()
       )
-      .sort((a, b) => a - b)[0];
+      .orderBy()[0];
   }
 
   firstStar(): number {
