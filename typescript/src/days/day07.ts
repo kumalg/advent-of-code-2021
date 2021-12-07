@@ -3,6 +3,7 @@ import { Day } from "../day";
 
 export default class extends Day {
   input: Array<number>;
+  max: number;
 
   constructor(resourcesPath: string) {
     super(resourcesPath, __filename);
@@ -10,23 +11,22 @@ export default class extends Day {
       .trim()
       .split(",")
       .map((e) => parseInt(e));
+    this.max = [...this.input].sort((a, b) => b - a)[0];
+  }
+
+  cheapestOutcomeFuel(burnFunc: (steps: number) => number) {
+    const { input } = this;
+
+    return range(this.max, 1)
+      .map((to) => input.map((from) => burnFunc(Math.abs(from - to))).sum())
+      .sort((a, b) => a - b)[0];
   }
 
   firstStar(): number {
-    const { input } = this;
-    const max = [...input].sort((a, b) => b - a)[0];
-
-    return range(max, 1)
-      .map((curr) => input.map((i) => Math.abs(i - curr)).sum())
-      .sort((a, b) => a - b)[0];
+    return this.cheapestOutcomeFuel((steps) => steps);
   }
 
   secondStar(): number {
-    const { input } = this;
-    const max = [...input].sort((a, b) => b - a)[0];
-
-    return range(max, 1)
-      .map((curr) => input.map((i) => range(Math.abs(i - curr), 1).sum()).sum())
-      .sort((a, b) => a - b)[0];
+    return this.cheapestOutcomeFuel((steps) => range(steps, 1).sum());
   }
 }
