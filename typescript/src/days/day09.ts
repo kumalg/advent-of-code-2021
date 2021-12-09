@@ -22,7 +22,7 @@ export default class extends Day {
       )
       .orderByDescending()
       .slice(0, 3)
-      .reduce((acc, curr) => acc * curr, 1);
+      .reduce((acc, curr) => acc * curr);
   }
 
   getAdjacents(x: number, y: number): Array<{ x: number; y: number }> {
