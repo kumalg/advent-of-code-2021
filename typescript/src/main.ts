@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 import path from "path";
-import Day from "./days/day09";
+import Day from "./days/day10";
 
 declare global {
   interface Array<T> {
     sum(func?: (item: T) => number): number;
     orderBy(func?: (item: T) => number): Array<T>;
     orderByDescending(func?: (item: T) => number): Array<T>;
+    last(): T;
   }
 }
 
@@ -26,6 +27,13 @@ Array.prototype.orderByDescending = function <T>(func?: (item: T) => number) {
     return this.sort((a: T, b: T) => func(b) - func(a));
   }
   return this.sort((a: number, b: number) => b - a);
+};
+
+Array.prototype.last = function () {
+  // if (this.length > 0) {
+  return this[this.length - 1];
+  // }
+  // return null;
 };
 
 const resourcesPath = path.join(__dirname, "../resources");
