@@ -59,7 +59,7 @@ export default class extends Day {
     };
 
     return this.input
-      .map(this.findSyntaxError)
+      .map(this.findSyntaxError.bind(this))
       .map((char) => (char ? points[char] : 0))
       .sum();
   }
@@ -74,7 +74,7 @@ export default class extends Day {
 
     const results = this.input
       .filter((line) => !this.findSyntaxError(line))
-      .map(this.repairLine)
+      .map(this.repairLine.bind(this))
       .map((chars) => chars.reduce((acc, curr): number => acc * 5 + points[curr], 0))
       .orderBy();
 
