@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import path from "path";
-import Day from "./days/day10";
+import Day from "./days/day11";
 
 declare global {
   interface Array<T> {
@@ -30,10 +30,7 @@ Array.prototype.orderByDescending = function <T>(func?: (item: T) => number) {
 };
 
 Array.prototype.last = function () {
-  // if (this.length > 0) {
   return this[this.length - 1];
-  // }
-  // return null;
 };
 
 const resourcesPath = path.join(__dirname, "../resources");
