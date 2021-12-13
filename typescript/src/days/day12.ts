@@ -34,7 +34,6 @@ export default class extends Day {
           (smallCavesDisallowed || smallCaveMaxCount <= currentPath.filter((nod) => nod === node).length)
       ),
     ];
-    const nextBlacklistItems: Array<string> = [];
 
     if (last === "end") {
       return [currentPath];
@@ -43,17 +42,13 @@ export default class extends Day {
     const possibleWays = this.nodes[last].filter((nextNode) => !pathBlacklist.includes(nextNode));
 
     if (possibleWays.length === 0) {
-      if (last.toLowerCase() === last) {
-        blackList.push(last);
-      } else {
-        nextBlacklistItems.push(last);
-      }
+      blackList.push(last);
       return [];
     }
 
     return [
       ...possibleWays.flatMap((nextNode) =>
-        this.getSomething([...currentPath, nextNode], [...blackList, ...nextBlacklistItems], smallCaveMaxCount)
+        this.getSomething([...currentPath, nextNode], [...blackList], smallCaveMaxCount)
       ),
     ];
   }
