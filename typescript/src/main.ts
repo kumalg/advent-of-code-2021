@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import path from "path";
-import Day from "./days/day11";
+import Day from "./days/day12";
 
 declare global {
   interface Array<T> {
