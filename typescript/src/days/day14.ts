@@ -1,3 +1,4 @@
+import { range } from "../helpers";
 import { Day } from "../day";
 
 function countOcurrences(str: string, value: string) {
@@ -18,32 +19,36 @@ export default class extends Day {
   }
 
   getDifference(steps: number): number {
-    let pairsOccurrencies = Object.fromEntries(
+    const initialPairs = Object.fromEntries(
       Object.keys(this.instructions).map((pair) => [pair, countOcurrences(this.polymer, pair)])
     );
 
-    for (let step = 0; step < steps; step++) {
+    const pairs = range(steps).reduce((oldPairs) => {
       const newPairs = Object.fromEntries(Object.keys(this.instructions).map((key) => [key, 0]));
 
-      Object.entries(pairsOccurrencies).forEach(([pair, occurrencies]) => {
+      Object.entries(oldPairs).forEach(([pair, occurrencies]) => {
         const newChar = this.instructions[pair];
 
         newPairs[pair[0] + newChar] += occurrencies;
         newPairs[newChar + pair[1]] += occurrencies;
       });
 
-      pairsOccurrencies = newPairs;
-    }
+      return newPairs;
+    }, initialPairs);
 
-    const keys = [...new Set(Object.keys(pairsOccurrencies).map(([[char]]) => char))];
+    const keysCount = Object.fromEntries(
+      [...new Set(Object.keys(pairs).map(([[char]]) => char))].map((key) => [
+        key,
+        Object.entries(pairs)
+          .filter(([[char]]) => char === key)
+          .sum(([, occ]) => occ),
+      ])
+    );
+    keysCount[this.polymer.slice(-1)] += 1;
 
-    const keysCount = keys.map((key) => {
-      return Object.entries(pairsOccurrencies)
-        .filter(([[char]]) => char === key)
-        .sum(([, occ]) => occ);
-    });
+    const counts = Object.values(keysCount);
 
-    return Math.max(...keysCount) - Math.min(...keysCount) + 1;
+    return Math.max(...counts) - Math.min(...counts);
   }
 
   firstStar(): number {
