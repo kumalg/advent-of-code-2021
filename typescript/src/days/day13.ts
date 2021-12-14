@@ -1,3 +1,4 @@
+import { bold, yellowBright } from "chalk";
 import { Day } from "../day";
 import { range } from "../helpers";
 
@@ -49,7 +50,9 @@ export default class extends Day {
     const yMax = Math.max(...dots.map(([, y]) => y));
 
     const list = range(yMax + 1).map((y) =>
-      range(xMax + 1).map((x) => (dots.some(([currX, currY]) => currX === x && currY === y) ? "#" : "."))
+      range(xMax + 1).map((x) =>
+        dots.some(([currX, currY]) => currX === x && currY === y) ? yellowBright(bold("█")) : " "
+      )
     );
 
     console.log(list.map((line) => line.join("")).join("\n"));

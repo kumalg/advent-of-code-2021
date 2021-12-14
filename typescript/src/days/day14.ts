@@ -1,5 +1,9 @@
-import { groupBy } from "lodash";
 import { Day } from "../day";
+
+function countOcurrences(str: string, value: string) {
+  const regExp = new RegExp(value, "gi");
+  return (str.match(regExp) || []).length;
+}
 
 export default class extends Day {
   polymer: string;
@@ -13,44 +17,45 @@ export default class extends Day {
     this.instructions = Object.fromEntries(input.slice(1).map((line) => line.split(" -> ")));
   }
 
-  firstStar(): number {
-    const steps = 10;
+  getDifference(steps: number): number {
+    let pairsOccurrencies = Object.fromEntries(
+      Object.keys(this.instructions).map((pair) => [pair, countOcurrences(this.polymer, pair)])
+    );
 
-    const polymer = this.polymer.split("");
     for (let step = 0; step < steps; step++) {
-      for (let charIndex = 0; charIndex < polymer.length; charIndex++) {
-        const pair = polymer.slice(charIndex, charIndex + 2).join("");
-        const matchingInsertion = this.instructions[pair];
+      const newPairs = Object.fromEntries(Object.keys(this.instructions).map((key) => [key, 0]));
 
-        if (matchingInsertion) {
-          polymer.splice(++charIndex, 0, matchingInsertion);
-        }
-      }
+      Object.entries(pairsOccurrencies).forEach(([pair, occurrencies]) => {
+        if (occurrencies === 0) return;
+
+        const newChar = this.instructions[pair];
+
+        const newPair1 = pair[0] + newChar;
+        const newPair2 = newChar + pair[1];
+
+        newPairs[newPair1] += occurrencies;
+        newPairs[newPair2] += occurrencies;
+      });
+
+      pairsOccurrencies = newPairs;
     }
 
-    const charCounts = Object.values(groupBy(polymer)).map((list) => list.length);
+    const keys = [...new Set(Object.keys(pairsOccurrencies).map(([[char]]) => char))];
 
-    return Math.max(...charCounts) - Math.min(...charCounts);
+    const keysCount = keys.map((key) => {
+      return Object.entries(pairsOccurrencies)
+        .filter(([[char]]) => char === key)
+        .sum(([, occ]) => occ);
+    });
+
+    return Math.max(...keysCount) - Math.min(...keysCount) + 1;
+  }
+
+  firstStar(): number {
+    return this.getDifference(10);
   }
 
   secondStar(): number {
-    const steps = 40;
-
-    const polymer = this.polymer.split("");
-    for (let step = 0; step < steps; step++) {
-      console.log("calculating step:", step);
-      for (let charIndex = 0; charIndex < polymer.length; charIndex++) {
-        const pair = polymer.slice(charIndex, charIndex + 2).join("");
-        const matchingInsertion = this.instructions[pair];
-
-        if (matchingInsertion) {
-          polymer.splice(++charIndex, 0, matchingInsertion);
-        }
-      }
-    }
-
-    const charCounts = Object.values(groupBy(polymer)).map((list) => list.length);
-
-    return Math.max(...charCounts) - Math.min(...charCounts);
+    return this.getDifference(40);
   }
 }
