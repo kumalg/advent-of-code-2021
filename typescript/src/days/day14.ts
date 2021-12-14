@@ -26,15 +26,10 @@ export default class extends Day {
       const newPairs = Object.fromEntries(Object.keys(this.instructions).map((key) => [key, 0]));
 
       Object.entries(pairsOccurrencies).forEach(([pair, occurrencies]) => {
-        if (occurrencies === 0) return;
-
         const newChar = this.instructions[pair];
 
-        const newPair1 = pair[0] + newChar;
-        const newPair2 = newChar + pair[1];
-
-        newPairs[newPair1] += occurrencies;
-        newPairs[newPair2] += occurrencies;
+        newPairs[pair[0] + newChar] += occurrencies;
+        newPairs[newChar + pair[1]] += occurrencies;
       });
 
       pairsOccurrencies = newPairs;
