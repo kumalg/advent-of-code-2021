@@ -8,6 +8,7 @@ declare global {
     orderBy(func?: (item: T) => number): Array<T>;
     orderByDescending(func?: (item: T) => number): Array<T>;
     last(): T;
+    distinct(): Array<T>;
   }
 }
 
@@ -31,6 +32,10 @@ Array.prototype.orderByDescending = function <T>(func?: (item: T) => number) {
 
 Array.prototype.last = function () {
   return this[this.length - 1];
+};
+
+Array.prototype.distinct = function () {
+  return [...new Set(this)];
 };
 
 const resourcesPath = path.join(__dirname, "../resources");

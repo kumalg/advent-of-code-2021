@@ -37,12 +37,15 @@ export default class extends Day {
     }, initialPairs);
 
     const keysCount = Object.fromEntries(
-      [...new Set(Object.keys(pairs).map(([[char]]) => char))].map((key) => [
-        key,
-        Object.entries(pairs)
-          .filter(([[char]]) => char === key)
-          .sum(([, occ]) => occ),
-      ])
+      Object.keys(pairs)
+        .map(([[char]]) => char)
+        .distinct()
+        .map((key) => [
+          key,
+          Object.entries(pairs)
+            .filter(([[char]]) => char === key)
+            .sum(([, occ]) => occ),
+        ])
     );
     keysCount[this.polymer.slice(-1)] += 1;
 
