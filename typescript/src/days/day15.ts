@@ -45,13 +45,7 @@ export default class extends Day {
     const last = nodes.last().key;
     const path = dijkstra.path("0_0", last);
 
-    let cost = 0;
-
-    for (let i = 0; i < path.length - 1; i++) {
-      cost += nodesObject[path[i]][path[i + 1]];
-    }
-
-    return cost;
+    return range(path.length - 1).sum((i) => nodesObject[path[i]][path[i + 1]]);
   }
 
   constructor(resourcesPath: string) {
