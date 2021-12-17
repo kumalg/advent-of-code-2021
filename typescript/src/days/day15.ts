@@ -14,12 +14,16 @@ export default class extends Day {
     return neight.filter(([x, y]) => x >= 0 && y >= 0 && x < input[0].length && y < input.length);
   }
 
+  getLoopedNodeCost(cost: number) {
+    return cost % 9 || cost;
+  }
+
   getCost(repeat = 1): number {
     const wideMap = this.getInputLines()
       .map((line) => line.split("").map((num) => parseInt(num)))
-      .map((line) => range(repeat).flatMap((i) => line.map((num) => (num + i) % 9 || num + i)));
+      .map((line) => range(repeat).flatMap((i) => line.map((num) => this.getLoopedNodeCost(num + i))));
 
-    const map = range(repeat).flatMap((i) => wideMap.map((line) => line.map((num) => (num + i) % 9 || num + i)));
+    const map = range(repeat).flatMap((i) => wideMap.map((line) => line.map((num) => this.getLoopedNodeCost(num + i))));
 
     const nodes = map.flatMap((row, y) =>
       row.map((_: number, x: number) => ({
@@ -28,11 +32,7 @@ export default class extends Day {
       }))
     );
 
-    const nodesObject: {
-      [k: string]: {
-        [k: string]: number;
-      };
-    } = Object.fromEntries(
+    const nodesObject = Object.fromEntries(
       nodes.map(({ key, nodes }) => [key, Object.fromEntries(nodes.map(({ node, cost }) => [node, cost]))])
     );
 
